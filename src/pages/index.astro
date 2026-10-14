@@ -92,6 +92,12 @@ import Layout from "../layouts/Layout.astro";
       <div class="chart-card">
         <PlotFigure
           options={{
+            title: "Relation entre la longueur et la profondeur du bec",
+            subtitle: "Données de l'exemple de visualisation Observable Plot",
+            caption:
+              "Chaque point représente un individu. Les couleurs distinguent les espèces.",
+            ariaLabel:
+              "Nuage de points représentant la longueur et la profondeur du bec des individus.",
             marks: [
               Plot.dot(penguins, {
                 x: "culmen_length_mm",

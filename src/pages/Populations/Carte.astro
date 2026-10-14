@@ -108,6 +108,11 @@ const listeAge = [
 
   const renderMap = () => {
     const plot = Plot.plot({
+      title: "Population par département",
+      subtitle: `Année ${selectedYear} · Sexe : ${selectedSex} · Âge : ${selectedAge}`,
+      caption:
+        "Les couleurs représentent la population en centaines de milliers. Survolez un département pour consulter sa valeur.",
+      ariaLabel: `Carte de la population des départements français pour ${selectedYear}, ${selectedSex}, ${selectedAge}.`,
       projection: {
         type: "mercator",
         domain: departements,
