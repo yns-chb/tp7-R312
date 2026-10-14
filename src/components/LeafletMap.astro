@@ -1,19 +1,22 @@
 ---
-// Import des styles CSS de Leaflet pour l'affichage de la carte
 import "leaflet/dist/leaflet.css";
 ---
 
-<div id="map" style="height: 600px;"></div>
+<div id="map" style="height: 600px;" aria-label="Carte des établissements"></div>
+
 <script>
   import listeEtablissements from "../assets/listeEtablissements.json";
-
-  // Import de la bibliothèque Leaflet pour créer la carte interactive
   import L from "leaflet";
 
-  // Création de la carte centrée sur la France.
-  const map = L.map("map").setView([46.6033, 1.883], 6);
+  // Ce script est exécuté côté client par Astro après son chargement dans le navigateur.
+  const mapElement = document.querySelector("#map");
 
-  // Couche OpenStreetMap, comme dans le guide Quick Start de Leaflet.
+  if (!mapElement) {
+    throw new Error("Le conteneur Leaflet #map est introuvable.");
+  }
+
+  const map = L.map(mapElement).setView([46.6033, 1.883], 6);
+
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
     maxZoom: 19,
     attribution:
