@@ -4,8 +4,112 @@ import Layout from "../layouts/Layout.astro";
 ---
 
 <Layout>
-  <main>
-    <h1 class="text-2xl">Établissements</h1>
+  <main class="content-container">
+    <div class="page-heading">
+      <div>
+        <p class="eyebrow">RÉSEAU TERRITORIAL</p>
+        <h1>Établissements</h1>
+        <p class="intro">
+          Localisez les établissements référencés sur le territoire français.
+        </p>
+      </div>
+      <span class="data-badge">OpenStreetMap</span>
+    </div>
+
+    <section class="map-card">
+      <div class="card-heading">
+        <div>
+          <h2>Carte des établissements</h2>
+          <p>Déplacez-vous sur la carte et sélectionnez un point.</p>
+        </div>
+      </div>
     <LeafletMap />
+    </section>
   </main>
 </Layout>
+
+<style>
+  .content-container {
+    width: min(1180px, calc(100% - 2rem));
+    margin: 0 auto;
+    padding: 3.5rem 0;
+  }
+
+  .page-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .eyebrow {
+    margin: 0 0 0.65rem;
+    color: #087443;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+  }
+
+  h1,
+  h2 {
+    margin: 0;
+    color: #17352b;
+    letter-spacing: -0.04em;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  .intro {
+    max-width: 620px;
+    margin: 0.8rem 0 0;
+    color: #678073;
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+
+  .data-badge {
+    padding: 0.5rem 0.75rem;
+    border-radius: 999px;
+    background: #e6f3eb;
+    color: #087443;
+    font-size: 0.75rem;
+    font-weight: 750;
+  }
+
+  .map-card {
+    overflow: hidden;
+    border: 1px solid #dce7df;
+    border-radius: 1.25rem;
+    background: white;
+    box-shadow: 0 16px 40px rgba(20, 71, 47, 0.08);
+  }
+
+  .card-heading {
+    padding: 1.5rem 1.75rem 1.25rem;
+    border-bottom: 1px solid #edf2ee;
+  }
+
+  .card-heading p {
+    margin: 0.35rem 0 0;
+    color: #789083;
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 640px) {
+    .content-container {
+      padding: 2rem 0;
+    }
+
+    .page-heading {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+</style>

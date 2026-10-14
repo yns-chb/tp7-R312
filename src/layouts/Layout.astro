@@ -3,16 +3,49 @@ import "../styles/global.css";
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="fr">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <title>Astro Basics</title>
+    <title>Observatoire des territoires</title>
   </head>
   <body>
-    <slot />
+    <header class="site-header">
+      <div class="container header-inner">
+        <a class="brand" href="/">
+          <span class="brand-mark">OT</span>
+          <span>
+            <strong>Observatoire</strong>
+            <small>Données territoriales</small>
+          </span>
+        </a>
+
+        <nav aria-label="Navigation principale">
+          <a class:list-active={Astro.url.pathname === "/"} href="/">Accueil</a>
+          <a
+            class:list-active={Astro.url.pathname.startsWith("/Populations")}
+            href="/Populations/Carte"
+          >Populations</a>
+          <a
+            class:list-active={Astro.url.pathname === "/etablissements"}
+            href="/etablissements"
+          >Établissements</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="page-shell">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <span>Observatoire des territoires</span>
+        <span>Explorez les données françaises</span>
+      </div>
+    </footer>
   </body>
 </html>
 
@@ -21,6 +54,130 @@ import "../styles/global.css";
   body {
     margin: 0;
     width: 100%;
-    height: 100%;
+    min-height: 100%;
+    background: #f5f7f4;
+    color: #17352b;
+    font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  }
+
+  :global(*) {
+    box-sizing: border-box;
+  }
+
+  .container {
+    width: min(1180px, calc(100% - 2rem));
+    margin: 0 auto;
+  }
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.94);
+    border-bottom: 1px solid #dce7df;
+    backdrop-filter: blur(12px);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    min-height: 76px;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: #17352b;
+    text-decoration: none;
+  }
+
+  .brand-mark {
+    display: grid;
+    width: 2.5rem;
+    height: 2.5rem;
+    place-items: center;
+    border-radius: 0.8rem;
+    background: #087443;
+    color: white;
+    font-weight: 800;
+    letter-spacing: -0.05em;
+  }
+
+  .brand strong,
+  .brand small {
+    display: block;
+  }
+
+  .brand strong {
+    font-size: 1rem;
+  }
+
+  .brand small {
+    margin-top: 0.15rem;
+    color: #678073;
+    font-size: 0.7rem;
+  }
+
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  nav a {
+    padding: 0.55rem 0.8rem;
+    border-radius: 0.6rem;
+    color: #547064;
+    font-size: 0.9rem;
+    font-weight: 650;
+    text-decoration: none;
+  }
+
+  nav a:hover,
+  nav a.list-active {
+    background: #e6f3eb;
+    color: #087443;
+  }
+
+  .page-shell {
+    min-height: calc(100vh - 140px);
+  }
+
+  .site-footer {
+    padding: 1.25rem 0;
+    border-top: 1px solid #dce7df;
+    color: #789083;
+    font-size: 0.8rem;
+  }
+
+  .site-footer .container {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  @media (max-width: 640px) {
+    .header-inner {
+      align-items: flex-start;
+      flex-direction: column;
+      gap: 0.5rem;
+      padding: 0.85rem 0;
+    }
+
+    nav {
+      width: 100%;
+      overflow-x: auto;
+    }
+
+    nav a {
+      white-space: nowrap;
+    }
+
+    .site-footer .container {
+      flex-direction: column;
+    }
   }
 </style>

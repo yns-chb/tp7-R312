@@ -1,6 +1,5 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import "../../styles/global.css";
 import populationMain from "../../assets/populationMain.json";
 
 const listePeriode = [
@@ -17,16 +16,29 @@ const listeAge = [
 ];
 ---
 <Layout>
-  <h1 class="text-2xl">Carte de la population par département</h1>
-  <p>
-    Cette carte représente la population par département en fonction de l'année,
-    du sexe et de l'âge sélectionnés.
-  </p>
-  <slot />
-<main>
-  <h1>Population par département</h1>
+  <section class="content-container">
+    <div class="page-heading">
+      <div>
+        <p class="eyebrow">DONNÉES DE POPULATION</p>
+        <h1>Population par département</h1>
+        <p class="intro">
+          Explorez la répartition de la population française selon l'année,
+          le sexe et la tranche d'âge.
+        </p>
+      </div>
+      <span class="data-badge">France métropolitaine</span>
+    </div>
 
-  <form id="population-filters" class="filters">
+    <section class="map-card">
+      <div class="card-heading">
+        <div>
+          <h2>Carte interactive</h2>
+          <p>Utilisez les filtres pour comparer les territoires.</p>
+        </div>
+        <span class="hint">Survolez un département</span>
+      </div>
+
+      <form id="population-filters" class="filters">
     <label>
       Année
       <select id="periode">
@@ -53,10 +65,12 @@ const listeAge = [
         ))}
       </select>
     </label>
-  </form>
 
-  <div id="population-map" aria-label="Carte de la population par département"></div>
-</main>
+      </form>
+
+      <div id="population-map" aria-label="Carte de la population par département"></div>
+    </section>
+  </section>
 </Layout>
 
 <script>
@@ -137,33 +151,142 @@ const listeAge = [
 
 <style>
   main {
-    max-width: 1200px;
+  }
+
+  .content-container {
+    width: min(1180px, calc(100% - 2rem));
     margin: 0 auto;
-    padding: 2rem;
+    padding: 3.5rem 0;
+  }
+
+  .page-heading {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .eyebrow {
+    margin: 0 0 0.65rem;
+    color: #087443;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+  }
+
+  h1,
+  h2 {
+    margin: 0;
+    letter-spacing: -0.04em;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+  }
+
+  .intro {
+    max-width: 620px;
+    margin: 0.8rem 0 0;
+    color: #678073;
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+
+  .data-badge,
+  .hint {
+    padding: 0.5rem 0.75rem;
+    border-radius: 999px;
+    background: #e6f3eb;
+    color: #087443;
+    font-size: 0.75rem;
+    font-weight: 750;
+    white-space: nowrap;
+  }
+
+  .map-card {
+    overflow: hidden;
+    border: 1px solid #dce7df;
+    border-radius: 1.25rem;
+    background: white;
+    box-shadow: 0 16px 40px rgba(20, 71, 47, 0.08);
+  }
+
+  .card-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.5rem 1.75rem 1.25rem;
+    border-bottom: 1px solid #edf2ee;
+  }
+
+  h2 {
+    font-size: 1.3rem;
+  }
+
+  .card-heading p {
+    margin: 0.35rem 0 0;
+    color: #789083;
+    font-size: 0.85rem;
   }
 
   .filters {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    margin-bottom: 1.5rem;
+    padding: 1.25rem 1.75rem;
+    background: #fbfdfb;
+    border-bottom: 1px solid #edf2ee;
   }
 
   .filters label {
     display: flex;
     flex-direction: column;
     gap: 0.35rem;
+    color: #547064;
+    font-size: 0.78rem;
     font-weight: 600;
   }
 
   .filters select {
     min-width: 12rem;
     padding: 0.4rem;
+    border: 1px solid #cbdacf;
+    border-radius: 0.5rem;
+    background: white;
+    color: #17352b;
     font: inherit;
   }
 
   #population-map {
-    min-height: 30rem;
+    min-height: 34rem;
+    padding: 1rem;
     overflow-x: auto;
+  }
+
+  @media (max-width: 640px) {
+    .content-container {
+      padding: 2rem 0;
+    }
+
+    .page-heading,
+    .card-heading {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .data-badge,
+    .hint {
+      white-space: normal;
+    }
+
+    .filters {
+      flex-direction: column;
+    }
+
+    .filters select {
+      width: 100%;
+    }
   }
 </style>

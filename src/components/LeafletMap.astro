@@ -2,7 +2,7 @@
 import "leaflet/dist/leaflet.css";
 ---
 
-<div id="map" style="height: 600px;" aria-label="Carte des établissements"></div>
+<div id="map" class="leaflet-map" aria-label="Carte des établissements"></div>
 
 <script>
   import listeEtablissements from "../assets/listeEtablissements.json";
@@ -28,4 +28,15 @@ import "leaflet/dist/leaflet.css";
       .addTo(map)
       .bindPopup(etablissement.name);
   }
+
+  requestAnimationFrame(() => map.invalidateSize());
 </script>
+
+<style>
+  .leaflet-map {
+    width: 100%;
+    height: 600px;
+    min-height: 400px;
+    z-index: 0;
+  }
+</style>
